@@ -1,7 +1,11 @@
 import React from "react";
 import { ExternalLink, Github, Calendar, Code, Database, Smartphone } from "lucide-react";
+import { motion } from "framer-motion";
+import { useScrollAnimation } from "../hooks/useScrollAnimation";
 
 const Projects = () => {
+  const { ref, isInView, fadeInUp, slideInLeft, slideInRight } = useScrollAnimation();
+  
   const projects = [
     {
       title: "Molto Vino",
@@ -43,7 +47,13 @@ const Projects = () => {
     <section className="py-12 sm:py-16 md:py-20 bg-white" id="projects">
       <div className="section-container">
         <div className="max-w-6xl mx-auto">
-          <div className="text-center mb-12">
+          <motion.div 
+            ref={ref}
+            initial="hidden"
+            animate={isInView ? "visible" : "hidden"}
+            variants={fadeInUp}
+            className="text-center mb-12"
+          >
             <div className="pulse-chip mx-auto mb-6">
               <span>Featured Projects</span>
             </div>
@@ -54,11 +64,18 @@ const Projects = () => {
             <p className="section-subtitle mx-auto">
               Explore some of my recent projects showcasing mobile app development expertise
             </p>
-          </div>
+          </motion.div>
 
           <div className="grid lg:grid-cols-2 gap-8">
             {projects.map((project, index) => (
-              <div key={index} className="glass-card p-6 hover-lift group">
+              <motion.div
+                key={index}
+                initial="hidden"
+                animate={isInView ? "visible" : "hidden"}
+                variants={index % 2 === 0 ? slideInLeft : slideInRight}
+                transition={{ delay: index * 0.2 }}
+                className="glass-card p-6 hover-lift group"
+              >
                 <div className="mb-4 rounded-lg overflow-hidden">
                   <div className="relative w-full" style={{ paddingBottom: '42.85%' }}>
                     <img 
@@ -87,7 +104,6 @@ const Projects = () => {
 
                 <p className="text-gray-700 mb-4">{project.description}</p>
 
-                {/* Technologies */}
                 <div className="mb-4">
                   <h4 className="text-sm font-semibold text-gray-900 mb-2">Technologies Used:</h4>
                   <div className="flex flex-wrap gap-2">
@@ -100,7 +116,6 @@ const Projects = () => {
                   </div>
                 </div>
 
-                {/* Action Buttons */}
                 <div className="flex gap-3">
                   <button className="flex items-center gap-2 px-4 py-2 bg-pulse-500 text-white rounded-lg hover:bg-pulse-600 transition-colors text-sm">
                     <ExternalLink size={14} />
@@ -111,18 +126,22 @@ const Projects = () => {
                     Source Code
                   </button>
                 </div>
-              </div>
+              </motion.div>
             ))}
           </div>
 
-          {/* More Projects CTA */}
-          <div className="text-center mt-12">
+          <motion.div 
+            initial="hidden"
+            animate={isInView ? "visible" : "hidden"}
+            variants={fadeInUp}
+            className="text-center mt-12"
+          >
             <p className="text-gray-600 mb-4">Want to see more of my work?</p>
             <a href="https://github.com/iAhmadTariq" target="_blank" rel="noopener noreferrer" className="button-primary inline-flex items-center gap-2">
               <Github size={16} />
               View All Projects on GitHub
             </a>
-          </div>
+          </motion.div>
         </div>
       </div>
     </section>

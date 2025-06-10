@@ -1,8 +1,11 @@
-
 import React from "react";
 import { Calendar, MapPin, Building } from "lucide-react";
+import { motion } from "framer-motion";
+import { useScrollAnimation } from "../hooks/useScrollAnimation";
 
 const Experience = () => {
+  const { ref, isInView, fadeInUp, slideInLeft, slideInRight } = useScrollAnimation();
+
   const experiences = [
     {
       company: "Venus Byte",
@@ -51,7 +54,13 @@ const Experience = () => {
     <section className="py-12 sm:py-16 md:py-20 bg-gray-50" id="experience">
       <div className="section-container">
         <div className="max-w-6xl mx-auto">
-          <div className="text-center mb-12">
+          <motion.div 
+            ref={ref}
+            initial="hidden"
+            animate={isInView ? "visible" : "hidden"}
+            variants={fadeInUp}
+            className="text-center mb-12"
+          >
             <div className="pulse-chip mx-auto mb-6">
               <span>Experience & Education</span>
             </div>
@@ -62,7 +71,7 @@ const Experience = () => {
             <p className="section-subtitle mx-auto">
               Building innovative mobile solutions and continuously learning new technologies
             </p>
-          </div>
+          </motion.div>
 
           {/* Experience Timeline */}
           <div className="mb-16">
@@ -72,7 +81,14 @@ const Experience = () => {
               <div className="absolute left-4 md:left-1/2 transform md:-translate-x-1/2 top-0 bottom-0 w-0.5 bg-pulse-200"></div>
               
               {experiences.map((exp, index) => (
-                <div key={index} className={`relative flex items-center mb-12 ${index % 2 === 0 ? 'md:flex-row' : 'md:flex-row-reverse'}`}>
+                <motion.div 
+                  key={index} 
+                  initial="hidden"
+                  animate={isInView ? "visible" : "hidden"}
+                  variants={index % 2 === 0 ? slideInLeft : slideInRight}
+                  transition={{ delay: index * 0.2 }}
+                  className={`relative flex items-center mb-12 ${index % 2 === 0 ? 'md:flex-row' : 'md:flex-row-reverse'}`}
+                >
                   {/* Timeline dot */}
                   <div className="absolute left-4 md:left-1/2 transform md:-translate-x-1/2 w-4 h-4 bg-pulse-500 rounded-full border-4 border-white z-10"></div>
                   
@@ -115,7 +131,7 @@ const Experience = () => {
                       </ul>
                     </div>
                   </div>
-                </div>
+                </motion.div>
               ))}
             </div>
           </div>
@@ -125,7 +141,14 @@ const Experience = () => {
             <h3 className="text-2xl font-bold text-gray-900 mb-8 text-center">Education</h3>
             <div className="grid md:grid-cols-2 gap-6">
               {education.map((edu, index) => (
-                <div key={index} className="glass-card p-6">
+                <motion.div 
+                  key={index} 
+                  initial="hidden"
+                  animate={isInView ? "visible" : "hidden"}
+                  variants={index % 2 === 0 ? slideInLeft : slideInRight}
+                  transition={{ delay: index * 0.2 }}
+                  className="glass-card p-6"
+                >
                   <h4 className="text-lg font-bold text-gray-900 mb-2">{edu.institution}</h4>
                   <p className="text-pulse-600 font-medium mb-2">{edu.degree}</p>
                   <div className="flex flex-col sm:flex-row sm:items-center gap-2 text-sm text-gray-600">
@@ -138,7 +161,7 @@ const Experience = () => {
                       <span>{edu.location}</span>
                     </div>
                   </div>
-                </div>
+                </motion.div>
               ))}
             </div>
           </div>
