@@ -53,14 +53,14 @@ const Hero = () => {
               className="text-xl sm:text-2xl lg:text-3xl text-pulse-500 font-semibold mt-2 mb-4 opacity-0 animate-fade-in" 
               style={{ animationDelay: "0.4s" }}
             >
-              Mobile Application Developer - Flutter
+              Mobile Application Developer - AI Enthusiast.
             </h2>
             
             <p 
               style={{ animationDelay: "0.5s" }} 
               className="section-subtitle mt-3 sm:mt-6 mb-4 sm:mb-8 leading-relaxed opacity-0 animate-fade-in text-gray-950 font-normal text-base sm:text-lg text-left"
-            >
-              Flutter Developer with proven expertise in building scalable, feature-rich applications. Proficient in state management, backend integrations, and delivering clean, industry-standard solutions across diverse domains.
+            > 
+              Mobile App Developer with proven expertise in building scalable, feature-rich applications. Proficient in state management, backend integrations, and delivering clean, industry-standard solutions across diverse domains. Enthusiastic about integrating AI technologies to create intelligent and innovative user experiences.
             </p>
             
             <div 
